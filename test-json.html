@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test JSON</title>
+</head>
+<body>
+    <h1>Test JSON Loading</h1>
+    <div id="output"></div>
+    <script>
+        fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/anime.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                document.getElementById('output').innerText = 'Error: ' + error;
+            });
+    </script>
+</body>
+</html>
