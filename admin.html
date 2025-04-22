@@ -202,6 +202,9 @@
             };
             fetch('/.netlify/functions/update-anime', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ action: 'add', anime: newAnime })
             })
                 .then(response => {
@@ -240,6 +243,9 @@
             const updatedAnime = { id: animeId, title, image, link: `/anime/${animeId}`, episodes };
             fetch('/.netlify/functions/update-anime', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ action: 'update', anime: updatedAnime })
             })
                 .then(response => {
@@ -275,6 +281,9 @@
             };
             fetch('/.netlify/functions/update-anime', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ action: 'addEpisode', animeId, episode: newEpisode })
             })
                 .then(response => {
@@ -296,6 +305,9 @@
             if (!confirm('Are you sure you want to delete this comment?')) return;
             fetch('/.netlify/functions/delete-comment', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ index })
             })
                 .then(response => {
