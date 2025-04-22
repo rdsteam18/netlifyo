@@ -1,0 +1,84 @@
+{
+  "series": [
+    {
+      "id": "lookism",
+      "title": "Lookism",
+      "image": "https://m.media-amazon.com/images/M/MV5BYTc1MTAzNWYtM2Q3Yy00OTExLWE1YTUtOTJhMzcyNGUzMGVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      "link": "/anime/lookism",
+      "episodes": [
+        {
+          "episodeNumber": 1,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABZ8i1xuWIzSitEQuquWZlT0AE3sm5XYa5oyGWgu8T-zYlxqO5aWJE44DUdwMNvf0I6K3wtFp_dhu2znAGc-GSYVamo1mrv5HcFFgzJxDKMU0gxs_f7Hv6C6M.jpg?r=7c1",
+          "servers": [
+            { "serverNumber": 1, "url": "https://Smoothpre.com/embed/i8nfnmio1vm8" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode1" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode1" }
+          ]
+        },
+        {
+          "episodeNumber": 2,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABaOZlY6Y5msNBEsc8QkO4UzOeFxbAWENN5S2CpaS_f-LyR3PY9k00qwPcbETj8odhJsCk9ggEylo32N7tWTcvifBEzEpibpI5kNJfGT7_GE0CANv38jQSfNo.jpg?r=081",
+          "servers": [
+            { "serverNumber": 1, "url": "https://Smoothpre.com/embed/5gj67dj85tmf" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode2" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode2" }
+          ]
+        },
+        {
+          "episodeNumber": 3,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABeSJ2UTiJQIOws84sWG29i1fjxFMSM36kAD5dnYoONs4MOKYWrP6Rh0RybQXkBPKj4phie5GvcF-b1_caXOd8srrU2RD9J17Yq-wNrUkBRCH9Rauq3MF20Wi.jpg?r=98e",
+          "servers": [
+            { "serverNumber": 1, "url": "https://Smoothpre.com/embed/wnu0ifmwy5iz" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode3" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode3" }
+          ]
+        },
+        {
+          "episodeNumber": 4,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABdG02KYfs6c369netfGG9gJLezzzF9rxu8jmKeWFt_Co1Hcc3FOQA0NvquFgi3eUk27WXwQcO0EWk1Ym91j8JTtxV9egFitLomPHlvakMjE09TM3bz1lMXVe.jpg?r=9db",
+          "servers": [
+            { "serverNumber": 1, "url": "https://short.icu/2sNbaT33J" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode4" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode4" }
+          ]
+        },
+        {
+          "episodeNumber": 5,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYV6vx9AHirBhEZAZYrljD5Y8nU1gL-sy0RDEB9_bwAeXZdTvTGWMpERK_zTkFy9hGQ8zNK-0npoftJo6tLYrtpvZkEU6WjOUB-KonhRLTGu4ysY19wKewNC.jpg?r=203",
+          "servers": [
+            { "serverNumber": 1, "url": "https://short.icu/oPumHkYiP" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode5" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode5" }
+          ]
+        },
+        {
+          "episodeNumber": 6,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABWS7g6470JMh7yLIMudbXuWNvZ7C1eJM7ozGBZE8EG02PtsZMahffcAURRvBO3qrbQ4lXAvVE7-RMpONb0lJtwYdR2wvuSt4BfnVsRpqnWLKSrrD98vB6ZPM.jpg?r=6aa",
+          "servers": [
+            { "serverNumber": 1, "url": "https://short.icu/Pb1FubuOL" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode6" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode6" }
+          ]
+        },
+        {
+          "episodeNumber": 7,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABT0THYd5HLhROwIlrS224fHfUNyt3jJszW89B9m-qdWy_hHZvIRoPYJGDXTtJpckC7NcflRx3aQ4OPkq_tkOjfgCZEGXMZrdBfwbdKhsv5NR6TeSJ1V-xOoU.jpg?r=bcc",
+          "servers": [
+            { "serverNumber": 1, "url": "https://short.icu/allUKIePr" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode7" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode7" }
+          ]
+        },
+        {
+          "episodeNumber": 8,
+          "thumbnail": "https://occ-0-3061-2186.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABa7oU3aoog0Y6PXJT4fqGhcp9czhJaBuC-kC_jcwblDlKODMe5Uq8Qutx5ruPghzkwp_eAfAI1j60Dhue0roJBwnxq35fv2rEpa6qwk35PiRivUvOH3LD9gP.jpg?r=9c7",
+          "servers": [
+            { "serverNumber": 1, "url": "https://short.icu/GaLHRkDIn" },
+            { "serverNumber": 2, "url": "https://example.com/server2/episode8" },
+            { "serverNumber": 3, "url": "https://example.com/server3/episode8" }
+          ]
+        }
+      ]
+    }
+  ]
+}
