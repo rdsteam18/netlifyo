@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmDev Anime Admin Panel</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00d1b2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #009688;
+        }
+        .episode-list, .comment-list {
+            margin-top: 20px;
+        }
+        .episode, .comment {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .episode input, .comment input {
+            margin: 5px 0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .form-group input, .form-group textarea {
+                font-size: 14px;
+            }
+            button {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div data-netlify-identity-menu></div>
+    <div class="container">
+        <h1>OmDev Anime Admin Panel</h1>
+
+        <!-- Add New Anime -->
+        <div class="section">
+            <h2>Add New Anime</h2>
+            <div class="form-group">
+                <label for="newAnimeId">Anime ID (e.g., lookism):</label>
+                <input type="text" id="newAnimeId" placeholder="Enter unique ID">
+            </div>
+            <div class="form-group">
+                <label for="newAnimeTitle">Title:</label>
+                <input type="text" id="newAnimeTitle" placeholder="Enter anime title">
+            </div>
+            <div class="form-group">
+                <label for="newAnimeImage">Image URL:</label>
+                <input type="text" id="newAnimeImage" placeholder="Enter image URL">
+            </div>
+            <button onclick="addAnime()">Add Anime</button>
+        </div>
+
+        <!-- Edit Anime -->
+        <div class="section">
+            <h2>Edit Anime</h2>
+            <div id="animeList"></div>
+        </div>
+
+        <!-- Manage Comments -->
+        <div class="section">
+            <h2>Manage Comments</h2>
+            <div id="commentList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Netlify Identity
+        netlifyIdentity.on('init', user => {
+            if (!user) {
+                netlifyIdentity.open('login');
+            }
+        });
+
+        // Load Anime and Comments
+        function loadAdminData() {
+            fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/anime.json')
+                .then(response => response.json())
+                .then(data => {
+                    const animeList = document.getElementById('animeList');
+                    animeList.innerHTML = '';
+                    data.series.forEach(anime => {
+                        const animeDiv = document.createElement('div');
+                        animeDiv.className = 'anime';
+                        animeDiv.innerHTML = `
+                            <h3>${anime.title}</h3>
+                            <div class="form-group">
+                                <label>Title:</label>
+                                <input type="text" value="${anime.title}" id="title-${anime.id}">
+                            </div>
+                            <div class="form-group">
+                                <label>Image URL:</label>
+                                <input type="text" value="${anime.image}" id="image-${anime.id}">
+                            </div>
+                            <h4>Episodes</h4>
+                            <div class="episode-list" id="episodes-${anime.id}">
+                                ${anime.episodes.map(episode => `
+                                    <div class="episode">
+                                        <label>Episode ${episode.episodeNumber} Thumbnail:</label>
+                                        <input type="text" value="${episode.thumbnail}" id="thumb-${anime.id}-${episode.episodeNumber}">
+                                        ${episode.servers.map(server => `
+                                            <label>Server ${server.serverNumber} URL:</label>
+                                            <input type="text" value="${server.url}" id="server-${anime.id}-${episode.episodeNumber}-${server.serverNumber}">
+                                        `).join('')}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button onclick="updateAnime('${anime.id}')">Update Anime</button>
+                            <button onclick="addEpisode('${anime.id}')">Add Episode</button>
+                        `;
+                        animeList.appendChild(animeDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('animeList').innerHTML = '<p>Error loading anime data.</p>';
+                });
+
+            fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/comments.json')
+                .then(response => response.json())
+                .then(data => {
+                    const commentList = document.getElementById('commentList');
+                    commentList.innerHTML = '';
+                    data.comments.forEach((comment, index) => {
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'comment';
+                        commentDiv.innerHTML = `
+                            <p><strong>${comment.user}</strong> (Episode ${comment.episodeNumber}, ${new Date(comment.timestamp).toLocaleString()}):</p>
+                            <p>${comment.comment}</p>
+                            <button onclick="deleteComment(${index})">Delete Comment</button>
+                        `;
+                        commentList.appendChild(commentDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('commentList').innerHTML = '<p>Error loading comments.</p>';
+                });
+        }
+
+        // Add new Anime
+        function addAnime() {
+            const id = document.getElementById('newAnimeId').value.trim().toLowerCase();
+            const title = document.getElementById('newAnimeTitle').value.trim();
+            const image = document.getElementById('newAnimeImage').value.trim();
+            if (!id || !title || !image) {
+                alert('Please fill all fields.');
+                return;
+            }
+            const newAnime = {
+                id,
+                title,
+                image,
+                link: `/anime/${id}`,
+                episodes: []
+            };
+            fetch('/.netlify/functions/update-anime', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'add', anime: newAnime })
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to add anime');
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('newAnimeId').value = '';
+                    document.getElementById('newAnimeTitle').value = '';
+                    document.getElementById('newAnimeImage').value = '';
+                    loadAdminData();
+                    alert('Anime added successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error adding anime: ' + error.message);
+                });
+        }
+
+        // Update Anime
+        function updateAnime(animeId) {
+            const title = document.getElementById(`title-${animeId}`).value.trim();
+            const image = document.getElementById(`image-${animeId}`).value.trim();
+            const episodes = [];
+            const episodeDivs = document.getElementById(`episodes-${animeId}`).getElementsByClassName('episode');
+            for (let i = 0; i < episodeDivs.length; i++) {
+                const episodeNumber = i + 1;
+                const thumbnail = document.getElementById(`thumb-${animeId}-${episodeNumber}`).value.trim();
+                const servers = [
+                    { serverNumber: 1, url: document.getElementById(`server-${animeId}-${episodeNumber}-1`).value.trim() },
+                    { serverNumber: 2, url: document.getElementById(`server-${animeId}-${episodeNumber}-2`).value.trim() },
+                    { serverNumber: 3, url: document.getElementById(`server-${animeId}-${episodeNumber}-3`).value.trim() }
+                ];
+                episodes.push({ episodeNumber, thumbnail, servers });
+            }
+            const updatedAnime = { id: animeId, title, image, link: `/anime/${animeId}`, episodes };
+            fetch('/.netlify/functions/update-anime', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'update', anime: updatedAnime })
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to update anime');
+                    return response.json();
+                })
+                .then(data => {
+                    loadAdminData();
+                    alert('Anime updated successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error updating anime: ' + error.message);
+                });
+        }
+
+        // Add new episode
+        function addEpisode(animeId) {
+            const episodeNumber = prompt('Enter episode number:');
+            if (!episodeNumber || isNaN(episodeNumber)) {
+                alert('Please enter a valid episode number.');
+                return;
+            }
+            const thumbnail = prompt('Enter thumbnail URL:') || 'https://via.placeholder.com/100';
+            const newEpisode = {
+                episodeNumber: parseInt(episodeNumber),
+                thumbnail,
+                servers: [
+                    { serverNumber: 1, url: 'https://example.com/server1/episode' + episodeNumber },
+                    { serverNumber: 2, url: 'https://example.com/server2/episode' + episodeNumber },
+                    { serverNumber: 3, url: 'https://example.com/server3/episode' + episodeNumber }
+                ]
+            };
+            fetch('/.netlify/functions/update-anime', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'addEpisode', animeId, episode: newEpisode })
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to add episode');
+                    return response.json();
+                })
+                .then(data => {
+                    loadAdminData();
+                    alert('Episode added successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error adding episode: ' + error.message);
+                });
+        }
+
+        // Delete comment
+        function deleteComment(index) {
+            if (!confirm('Are you sure you want to delete this comment?')) return;
+            fetch('/.netlify/functions/delete-comment', {
+                method: 'POST',
+                body: JSON.stringify({ index })
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to delete comment');
+                    return response.json();
+                })
+                .then(data => {
+                    loadAdminData();
+                    alert('Comment deleted successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting comment: ' + error.message);
+                });
+        }
+
+        // Load data on page load
+        loadAdminData();
+    </script>
+</body>
+</html>
