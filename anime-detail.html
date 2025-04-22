@@ -117,6 +117,44 @@
         .episode button:hover {
             background-color: #00d1b2;
         }
+        .comments-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .comments-section h3 {
+            margin-top: 0;
+        }
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .comment-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        .comment-form button {
+            padding: 10px;
+            background-color: #00d1b2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+        .comment {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .comment p {
+            margin: 5px 0;
+        }
         footer {
             background-color: #222;
             color: #fff;
@@ -174,6 +212,14 @@
             <span class="watch-button">Watch</span>
         </a>
         <div id="episodes"></div>
+        <div class="comments-section">
+            <h3>Comments</h3>
+            <div class="comment-form">
+                <textarea id="commentInput" placeholder="Add a comment..." rows="4"></textarea>
+                <button onclick="postComment()">Post Comment</button>
+            </div>
+            <div id="comments"></div>
+        </div>
     </div>
 
     <footer>
@@ -182,8 +228,8 @@
 
     <script>
         // Get Anime ID from URL
-        const path = window.location.pathname; // e.g., /anime/lookism
-        const animeId = path.split('/').pop(); // e.g., lookism
+        const path = window.location.pathname;
+        const animeId = path.split('/').pop();
 
         // Load Anime data
         fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/anime.json')
@@ -199,7 +245,7 @@
                     return;
                 }
 
-                // Update page title and meta tags dynamically
+                // Update page title and meta tags
                 document.title = `Watch ${anime.title} - OmDev Anime`;
                 document.querySelector('meta[name="description"]').content = `Watch ${anime.title} and other Anime series in HD on OmDev Anime & Netlify.`;
                 document.querySelector('meta[property="og:title"]').content = `Watch ${anime.title} - OmDev Anime & Netlify`;
@@ -222,7 +268,7 @@
                         <div class="episode">
                             <img src="${episode.thumbnail}" alt="Episode ${episode.episodeNumber}">
                             ${episode.servers.map(server => `
-                                <button onclick="changeEpisode('${server.url}', ${episode.episodeNumber}, ${server.serverNumber})">
+                                <button onclick="changeEpisode('${server.url}', ${episode.episodeNumber}, ${server.serverNumber}, ${episode.episodeNumber})">
                                     Server ${server.serverNumber}
                                 </button>
                             `).join('')}
@@ -230,6 +276,9 @@
                     `;
                     episodesDiv.appendChild(episodeDiv);
                 });
+
+                // Load comments
+                loadComments(animeId, 1); // Default to Episode 1
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -238,13 +287,78 @@
             });
 
         // Change episode
-        function changeEpisode(url, episodeNumber, serverNumber) {
+        function changeEpisode(url, episodeNumber, serverNumber, episodeNum) {
             document.getElementById('videoFrame').src = url;
             document.getElementById('episodeTitle').innerText = `Now Watching: Episode ${episodeNumber}, Server ${serverNumber}`;
             document.getElementById('watchButton').href = url;
+            loadComments(animeId, episodeNum); // Load comments for selected episode
         }
 
-        // Search functionality (redirect to homepage with query)
+        // Load comments
+        function loadComments(animeId, episodeNumber) {
+            fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/comments.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to fetch comments.json');
+                    return response.json();
+                })
+                .then(data => {
+                    const commentsDiv = document.getElementById('comments');
+                    commentsDiv.innerHTML = '';
+                    const filteredComments = data.comments.filter(c => c.animeId === animeId && c.episodeNumber === episodeNumber);
+                    filteredComments.forEach(comment => {
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'comment';
+                        commentDiv.innerHTML = `
+                            <p><strong>${comment.user}</strong> (${new Date(comment.timestamp).toLocaleString()}):</p>
+                            <p>${comment.comment}</p>
+                        `;
+                        commentsDiv.appendChild(commentDiv);
+                    });
+                    if (filteredComments.length === 0) {
+                        commentsDiv.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('comments').innerHTML = '<p>Error loading comments. Please try again later.</p>';
+                });
+        }
+
+        // Post comment
+        function postComment() {
+            const commentText = document.getElementById('commentInput').value.trim();
+            if (!commentText) {
+                alert('Please enter a comment.');
+                return;
+            }
+            const episodeNumber = document.getElementById('episodeTitle').innerText.match(/Episode (\d+)/)[1];
+            const newComment = {
+                animeId: animeId,
+                episodeNumber: parseInt(episodeNumber),
+                user: 'Guest', // Update with Netlify Identity user later
+                comment: commentText,
+                timestamp: new Date().toISOString()
+            };
+            fetch('/.netlify/functions/post-comment', {
+                method: 'POST',
+                body: JSON.stringify(newComment)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to post comment');
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('commentInput').value = '';
+                    loadComments(animeId, parseInt(episodeNumber));
+                    alert('Comment posted successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error posting comment: ' + error.message);
+                });
+        }
+
+        // Search functionality
         function searchAnime() {
             const query = document.getElementById('searchInput').value;
             if (query) {
