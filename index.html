@@ -3,17 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>omdev</title>
+    <meta name="description" content="Watch & Explore the Best Anime Series on OmDev Anime & Netlify. Stream top-rated anime in HD for free with subtitles and dubbing.">
+    <meta name="keywords" content="Anime, Watch Anime Online, Free Anime Streaming, OmDev Anime, Netlify Anime, Lookism Anime, Best Anime Series, HD Anime, Dubbed Anime, Subbed Anime">
+    <meta name="author" content="OmDev NETLIFY">
+    <meta name="contact" content="rdsteam18@gmail.com">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="OmDev Anime & Netlify - Watch Anime Online">
+    <meta property="og:site_name" content="OmDev Anime & Netlify">
+    <meta property="og:url" content="https://omdevnetfy.netlify.app/">
+    <meta property="og:image" content="https://m.media-amazon.com/images/M/MV5BYTc1MTAzNWYtM2Q3Yy00OTExLWE1YTUtOTJhMzcyNGUzMGVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+    <meta property="og:description" content="Stream and Enjoy HD Anime Series for Free on OmDev Anime & Netlify.">
+    <title>OmDev Anime - Watch Anime Online</title>
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/a/AVvXsEgGhd-CvK9t1DntiBFXedIpokqWdKqwRCgOdI9KOEqlkLOgRpUCzkxDhiKbPAUhWgMa_3iCZy-eg1k1udxqEbMP8kMxLP9ktvBAqrgJV5S-nV1iStBeZjxgH7ECwxAJwmI_XUGnVzNO7Ff-Lbg2iHjsq7HPkuEKi3bXiEMaoJKPbgRyUikodONA5h4f=rw">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        .nav-links a:hover {
+            color: #00d1b2;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 8px 12px;
+            background-color: #00d1b2;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .anime-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .anime-card:hover {
+            transform: scale(1.05);
+        }
+        .anime-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .anime-card h3 {
+            margin: 10px;
+            font-size: 18px;
+        }
+        .anime-card a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #00d1b2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #00d1b2;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .anime-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            .nav-links a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+            .search-bar input {
+                width: 120px;
+            }
+        }
+    </style>
 </head>
 <body>
-   <div class="anime-grid">
-  <!-- डायनामिक कार्ड्स -->
-  <div class="anime-card">
-    <img src="https://m.media-amazon.com/images/M/MV5BYTc1MTAzNWYtM2Q3Yy00OTExLWE1YTUtOTJhMzcyNGUzMGVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Lookism">
-    <h3>Lookism</h3>
-    <a href="/anime/lookism">Watch Now</a>
-  </div>
-  <!-- और कार्ड्स -->
-</div>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhQ7VdONt8W-hQ1U9cjlSyDreUB4qVxFH4I9VbiKD5cjKCHT-rqpu_Pt_Rc3Ff-IXIs2CW24yLg8HumiOQ6mS8QTPyfjI93LGSrxgtV6s0ol7Ky_GA8j42d1HttAkOrMgPaDyL_uDXkZfM15AzSE1TDh2j4FY8KZjyDWxrX0CD1X-rN95_GdqTqEjR2TGw=s150" alt="OmDev Anime">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/genres">Genres</a>
+                <a href="/about">About</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search Anime...">
+                <button onclick="searchAnime()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="anime-grid" id="animeGrid"></div>
+
+    <footer>
+        All Rights Reserved. <a href="https://omdevnetfy.netlify.app/">© OmDev NETLIFY</a>
+    </footer>
+
+    <script>
+        // Load Anime cards from anime.json
+        fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/anime.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to fetch anime.json');
+                return response.json();
+            })
+            .then(data => {
+                const animeGrid = document.getElementById('animeGrid');
+                data.series.forEach(anime => {
+                    const card = document.createElement('div');
+                    card.className = 'anime-card';
+                    card.innerHTML = `
+                        <img src="${anime.image}" alt="${anime.title}">
+                        <h3>${anime.title}</h3>
+                        <a href="${anime.link}">Watch Now</a>
+                    `;
+                    animeGrid.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('animeGrid').innerHTML = '<p>Error loading anime data. Please try again later.</p>';
+            });
+
+        // Search functionality
+        function searchAnime() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/anime.json')
+                .then(response => response.json())
+                .then(data => {
+                    const animeGrid = document.getElementById('animeGrid');
+                    animeGrid.innerHTML = '';
+                    data.series
+                        .filter(anime => anime.title.toLowerCase().includes(query))
+                        .forEach(anime => {
+                            const card = document.createElement('div');
+                            card.className = 'anime-card';
+                            card.innerHTML = `
+                                <img src="${anime.image}" alt="${anime.title}">
+                                <h3>${anime.title}</h3>
+                                <a href="${anime.link}">Watch Now</a>
+                            `;
+                            animeGrid.appendChild(card);
+                        });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    animeGrid.innerHTML = '<p>Error searching anime. Please try again.</p>';
+                });
+        }
+    </script>
 </body>
 </html>
