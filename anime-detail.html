@@ -335,12 +335,15 @@
             const newComment = {
                 animeId: animeId,
                 episodeNumber: parseInt(episodeNumber),
-                user: 'Guest', // Update with Netlify Identity user later
+                user: 'Guest',
                 comment: commentText,
                 timestamp: new Date().toISOString()
             };
             fetch('/.netlify/functions/post-comment', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(newComment)
             })
                 .then(response => {
