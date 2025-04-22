@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch Lookism and other Anime series in HD on OmDev Anime & Netlify. Stream with multiple server options and subtitles.">
+    <meta name="keywords" content="Anime, Lookism Anime, Watch Anime Online, Free Anime Streaming, OmDev Anime, Netlify Anime, HD Anime, Dubbed Anime, Subbed Anime">
+    <meta name="author" content="OmDev NETLIFY">
+    <meta name="contact" content="rdsteam18@gmail.com">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Watch Lookism - OmDev Anime & Netlify">
+    <meta property="og:site_name" content="OmDev Anime & Netlify">
+    <meta property="og:url" content="https://omdevnetfy.netlify.app/anime/lookism">
+    <meta property="og:image" content="https://m.media-amazon.com/images/M/MV5BYTc1MTAzNWYtM2Q3Yy00OTExLWE1YTUtOTJhMzcyNGUzMGVmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+    <meta property="og:description" content="Stream Lookism and other Anime series for free on OmDev Anime & Netlify with multiple server options.">
+    <title>Watch Anime - OmDev Anime</title>
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/a/AVvXsEgGhd-CvK9t1DntiBFXedIpokqWdKqwRCgOdI9KOEqlkLOgRpUCzkxDhiKbPAUhWgMa_3iCZy-eg1k1udxqEbMP8kMxLP9ktvBAqrgJV5S-nV1iStBeZjxgH7ECwxAJwmI_XUGnVzNO7Ff-Lbg2iHjsq7HPkuEKi3bXiEMaoJKPbgRyUikodONA5h4f=rw">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo img {
+            height: 50px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        .nav-links a:hover {
+            color: #00d1b2;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 8px 12px;
+            background-color: #00d1b2;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .episode-title {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+        .watch-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #00d1b2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .episode-buttons {
+            margin: 20px 0;
+        }
+        .episode {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .episode img {
+            width: 100px;
+            height: auto;
+            border-radius: 4px;
+        }
+        .episode button {
+            padding: 8px 12px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .episode button:hover {
+            background-color: #00d1b2;
+        }
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #00d1b2;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            iframe {
+                height: 200px;
+            }
+            .episode {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .episode img {
+                width: 80px;
+            }
+            .watch-button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhQ7VdONt8W-hQ1U9cjlSyDreUB4qVxFH4I9VbiKD5cjKCHT-rqpu_Pt_Rc3Ff-IXIs2CW24yLg8HumiOQ6mS8QTPyfjI93LGSrxgtV6s0ol7Ky_GA8j42d1HttAkOrMgPaDyL_uDXkZfM15AzSE1TDh2j4FY8KZjyDWxrX0CD1X-rN95_GdqTqEjR2TGw=s150" alt="OmDev Anime">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/genres">Genres</a>
+                <a href="/about">About</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search Anime...">
+                <button onclick="searchAnime()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 id="animeTitle">Loading...</h1>
+        <div class="episode-title" id="episodeTitle">Now Watching: Episode 1, Server 1</div>
+        <iframe id="videoFrame" src=""></iframe>
+        <a id="watchButton" href="">
+            <span class="watch-button">Watch</span>
+        </a>
+        <div id="episodes"></div>
+    </div>
+
+    <footer>
+        All Rights Reserved. <a href="https://omdevnetfy.netlify.app/">© OmDev NETLIFY</a>
+    </footer>
+
+    <script>
+        // Get Anime ID from URL
+        const path = window.location.pathname; // e.g., /anime/lookism
+        const animeId = path.split('/').pop(); // e.g., lookism
+
+        // Load Anime data
+        fetch('https://raw.githubusercontent.com/rdsteam18/netlifyo/main/data/anime.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to fetch anime.json');
+                return response.json();
+            })
+            .then(data => {
+                const anime = data.series.find(s => s.id === animeId);
+                if (!anime) {
+                    document.getElementById('animeTitle').innerText = 'Anime not found';
+                    document.getElementById('episodes').innerHTML = '<p>Anime not found. Please go back to the homepage.</p>';
+                    return;
+                }
+
+                // Update page title and meta tags dynamically
+                document.title = `Watch ${anime.title} - OmDev Anime`;
+                document.querySelector('meta[name="description"]').content = `Watch ${anime.title} and other Anime series in HD on OmDev Anime & Netlify.`;
+                document.querySelector('meta[property="og:title"]').content = `Watch ${anime.title} - OmDev Anime & Netlify`;
+                document.querySelector('meta[property="og:url"]').content = window.location.href;
+                document.querySelector('meta[property="og:image"]').content = anime.image;
+
+                // Update page content
+                document.getElementById('animeTitle').innerText = anime.title;
+                const defaultUrl = anime.episodes[0].servers[0].url;
+                document.getElementById('videoFrame').src = defaultUrl;
+                document.getElementById('watchButton').href = defaultUrl;
+
+                // Load episodes
+                const episodesDiv = document.getElementById('episodes');
+                anime.episodes.forEach(episode => {
+                    const episodeDiv = document.createElement('div');
+                    episodeDiv.className = 'episode-buttons';
+                    episodeDiv.innerHTML = `
+                        <h3>Episode ${episode.episodeNumber}</h3>
+                        <div class="episode">
+                            <img src="${episode.thumbnail}" alt="Episode ${episode.episodeNumber}">
+                            ${episode.servers.map(server => `
+                                <button onclick="changeEpisode('${server.url}', ${episode.episodeNumber}, ${server.serverNumber})">
+                                    Server ${server.serverNumber}
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+                    episodesDiv.appendChild(episodeDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('animeTitle').innerText = 'Error loading anime';
+                document.getElementById('episodes').innerHTML = '<p>Error loading anime data. Please try again later.</p>';
+            });
+
+        // Change episode
+        function changeEpisode(url, episodeNumber, serverNumber) {
+            document.getElementById('videoFrame').src = url;
+            document.getElementById('episodeTitle').innerText = `Now Watching: Episode ${episodeNumber}, Server ${serverNumber}`;
+            document.getElementById('watchButton').href = url;
+        }
+
+        // Search functionality (redirect to homepage with query)
+        function searchAnime() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                window.location.href = `/?search=${encodeURIComponent(query)}`;
+            }
+        }
+    </script>
+</body>
+</html>
