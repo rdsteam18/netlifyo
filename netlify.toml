@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/anime/:id"
+  to = "/anime-detail.html"
+  status = 200
