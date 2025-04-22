@@ -1,7 +1,23 @@
 const { Octokit } = require("@octokit/rest");
 
 exports.handler = async function(event) {
-    const comment = JSON.parse(event.body);
+    console.log('Event received:', event);
+
+    // Check if body exists and is a string
+    const body = event.body ? (typeof event.body === 'string' ? event.body : JSON.stringify(event.body)) : '{}';
+    console.log('Parsed body:', body);
+
+    let comment;
+    try {
+        comment = JSON.parse(body);
+    } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ error: 'Invalid JSON input' })
+        };
+    }
+
     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
     try {
@@ -24,6 +40,7 @@ exports.handler = async function(event) {
             body: JSON.stringify({ message: 'Comment posted' })
         };
     } catch (error) {
+        console.error('Error:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: error.message })
