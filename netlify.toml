@@ -1,3 +1,6 @@
+[build]
+  functions = "functions"
+
 [[redirects]]
   from = "/anime/:id"
   to = "/anime-detail.html"
